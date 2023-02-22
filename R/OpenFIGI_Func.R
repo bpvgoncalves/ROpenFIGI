@@ -38,7 +38,7 @@ OpenFIGI <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com
     )
   }
 
-  if(class(input) == 'json'){
+  if(inherits(input, "json")){
     myjson <- input
   } else {
     myjson <- jsonlite::toJSON(input)
