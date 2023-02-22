@@ -12,7 +12,8 @@ OpenFIGI_MappingCreator(
     "ID_CUSIP", "ID_BB", "ID_ITALY", "ID_EXCH_SYMBOL", "ID_FULL_EXCHANGE_SYMBOL",
     "COMPOSITE_ID_BB_GLOBAL", "ID_BB_GLOBAL_SHARE_CLASS_LEVEL", "ID_BB_SEC_NUM_DES",
     "ID_BB_GLOBAL", "TICKER", "ID_CUSIP_8_CHR", "OCC_SYMBOL", "UNIQUE_ID_FUT_OPT",
-    "OPRA_SYMBOL", "TRADING_SYSTEM_IDENTIFIER")
+    "OPRA_SYMBOL", "TRADING_SYSTEM_IDENTIFIER"),
+  proxy = NULL
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ OpenFIGI_MappingCreator(
 \item{openfigiurl}{Bloomberg's OpenFIGI URL, please see https://openfigi.com/api}
 
 \item{additioncols}{additional columns you would like to include in the data.frame}
+
+\item{proxy}{if needed, web proxy information can be passed to the function}
 }
 \value{
 a data.frame

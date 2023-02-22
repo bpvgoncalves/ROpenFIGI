@@ -18,15 +18,19 @@ showFIGIIDType <- function(){
 #' @param apikey your API key
 #' @param openfigiurl Bloomberg's OpenFIGI URL, please see https://openfigi.com/api
 #' @param preferdf if only supply 1 input, do you prefer to see the data.frame directly
-#' @details you may need to setInternet2() or set up proxy if needed
+#' @param proxy if needed, web proxy information can be passed to the function
 #' @return a list of data.frame, of a data.frame if preferdf=T and only 1 request
 #' @examples
 #' \dontrun{
-#'   setInternet2()
 #'   figirst = OpenFIGI(sampleOpenFIGIdf())
 #' }
 #' @export
-OpenFIGI <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com/v1/mapping", preferdf = F){
+OpenFIGI <- function(input,
+                     apikey = NULL,
+                     openfigiurl = "https://api.openfigi.com/v1/mapping",
+                     preferdf = FALSE,
+                     proxy = NULL){
+
   if(is.null(apikey)){
     h <- httr::add_headers(
       "Content-Type" = "text/json"
@@ -44,7 +48,11 @@ OpenFIGI <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com
     myjson <- jsonlite::toJSON(input)
   }
 
-  req <- httr::POST(openfigiurl, h, body = myjson)
+  if(is.null(proxy)){
+    req <- httr::POST(openfigiurl, h, body = myjson)
+  } else {
+    req <- httr::POST(openfigiurl, h, proxy, body = myjson)
+  }
 
   if(as.integer(req$status_code)!=200L){
     ## has invalid return code.
@@ -71,6 +79,7 @@ OpenFIGI <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com
 #' @param apikey your API key
 #' @param openfigiurl Bloomberg's OpenFIGI URL, please see https://openfigi.com/api
 #' @param additioncols additional columns you would like to include in the data.frame
+#' @param proxy if needed, web proxy information can be passed to the function
 #' @return a data.frame
 #' @examples
 #' \dontrun{
@@ -78,10 +87,14 @@ OpenFIGI <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com
 #'   figirst = OpenFIGI_MappingCreator(sampleOpenFIGIdf())
 #' }
 #' @export
-OpenFIGI_MappingCreator <- function(input, apikey=NULL, openfigiurl = "https://api.openfigi.com/v1/mapping",additioncols = c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON","ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY","ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL","COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",'ID_BB_SEC_NUM_DES',"ID_BB_GLOBAL","TICKER","ID_CUSIP_8_CHR",'OCC_SYMBOL','UNIQUE_ID_FUT_OPT','OPRA_SYMBOL','TRADING_SYSTEM_IDENTIFIER')){
+OpenFIGI_MappingCreator <- function(input,
+                                    apikey=NULL,
+                                    openfigiurl = "https://api.openfigi.com/v1/mapping",
+                                    additioncols = c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON","ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY","ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL","COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",'ID_BB_SEC_NUM_DES',"ID_BB_GLOBAL","TICKER","ID_CUSIP_8_CHR",'OCC_SYMBOL','UNIQUE_ID_FUT_OPT','OPRA_SYMBOL','TRADING_SYSTEM_IDENTIFIER'),
+                                    proxy = NULL){
 
 
-  jsonrst <- OpenFIGI(input, apikey, openfigiurl, F)
+  jsonrst <- OpenFIGI(input, apikey, openfigiurl, FALSE, proxy)
 
   if(is.null(jsonrst) || length(jsonrst)==0)return(NULL)
 

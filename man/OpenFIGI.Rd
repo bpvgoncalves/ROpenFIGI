@@ -8,7 +8,8 @@ OpenFIGI(
   input,
   apikey = NULL,
   openfigiurl = "https://api.openfigi.com/v1/mapping",
-  preferdf = F
+  preferdf = FALSE,
+  proxy = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ OpenFIGI(
 \item{openfigiurl}{Bloomberg's OpenFIGI URL, please see https://openfigi.com/api}
 
 \item{preferdf}{if only supply 1 input, do you prefer to see the data.frame directly}
+
+\item{proxy}{if needed, web proxy information can be passed to the function}
 }
 \value{
 a list of data.frame, of a data.frame if preferdf=T and only 1 request
@@ -26,12 +29,8 @@ a list of data.frame, of a data.frame if preferdf=T and only 1 request
 \description{
 OpenFIGI main function
 }
-\details{
-you may need to setInternet2() or set up proxy if needed
-}
 \examples{
 \dontrun{
-  setInternet2()
   figirst = OpenFIGI(sampleOpenFIGIdf())
 }
 }
