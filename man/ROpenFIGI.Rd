@@ -4,7 +4,7 @@
 \name{ROpenFIGI}
 \alias{ROpenFIGI}
 \title{ROpenFIGI}
-\details{
+\description{
 Provide a simple interface to OpenFIGI by Bloomberg.
 parse data into data.frame
 }
