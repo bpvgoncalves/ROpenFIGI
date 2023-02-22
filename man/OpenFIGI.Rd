@@ -4,8 +4,12 @@
 \alias{OpenFIGI}
 \title{OpenFIGI main function}
 \usage{
-OpenFIGI(input, apikey = NULL,
-  openfigiurl = "https://api.openfigi.com/v1/mapping", preferdf = F)
+OpenFIGI(
+  input,
+  apikey = NULL,
+  openfigiurl = "https://api.openfigi.com/v1/mapping",
+  preferdf = F
+)
 }
 \arguments{
 \item{input}{input data.frame or json, and others that can be feed into toJSON}
@@ -31,4 +35,3 @@ you may need to setInternet2() or set up proxy if needed
   figirst = OpenFIGI(sampleOpenFIGIdf())
 }
 }
-

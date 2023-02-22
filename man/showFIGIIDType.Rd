@@ -12,4 +12,3 @@ a char vector
 \description{
 Generate FIGI Supported Identifiers
 }
-

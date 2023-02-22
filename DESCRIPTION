@@ -14,4 +14,4 @@ Imports:
     httr,
     jsonlite
 Suggests: testthat, dplyr
-RoxygenNote: 5.0.1
+RoxygenNote: 7.2.3
