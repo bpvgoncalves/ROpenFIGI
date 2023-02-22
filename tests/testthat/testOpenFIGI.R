@@ -1,6 +1,4 @@
 
-library(ROpenFIGI)
-library(dplyr)
 jsondf <- sampleOpenFIGIdf()
 
 jsonrst <- OpenFIGI(jsondf)
