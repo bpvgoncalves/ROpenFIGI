@@ -10,7 +10,10 @@ sampleOpenFIGIdf <- function(){
 #' @return a char vector
 #' @export
 showFIGIIDType <- function(){
-  c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON","ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY","ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL","COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",'ID_BB_SEC_NUM_DES',"ID_BB_GLOBAL","TICKER","ID_CUSIP_8_CHR",'OCC_SYMBOL','UNIQUE_ID_FUT_OPT','OPRA_SYMBOL','TRADING_SYSTEM_IDENTIFIER')
+  c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON","ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY",
+    "ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL","COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",
+    "ID_BB_SEC_NUM_DES","ID_BB_GLOBAL","TICKER","ID_CUSIP_8_CHR","OCC_SYMBOL","UNIQUE_ID_FUT_OPT",
+    "OPRA_SYMBOL","TRADING_SYSTEM_IDENTIFIER")
 }
 
 #' OpenFIGI main function
@@ -38,7 +41,7 @@ OpenFIGI <- function(input,
   } else {
     h <- httr::add_headers(
       "Content-Type" = "text/json",
-      'X-OPENFIGI-APIKEY'= apikey
+      "X-OPENFIGI-APIKEY" = apikey
     )
   }
 
@@ -65,7 +68,7 @@ OpenFIGI <- function(input,
   jsonrst <- jsonlite::fromJSON(jsonrst)
 
 
-  jsonrst <- jsonrst[['data']]
+  jsonrst <- jsonrst[["data"]]
 
   ## now, jsonrst has all result, as a list.
   if(preferdf && length(jsonrst) == 1L) return(jsonrst[[1L]])
@@ -90,7 +93,13 @@ OpenFIGI <- function(input,
 OpenFIGI_MappingCreator <- function(input,
                                     apikey=NULL,
                                     openfigiurl = "https://api.openfigi.com/v1/mapping",
-                                    additioncols = c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON","ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY","ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL","COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",'ID_BB_SEC_NUM_DES',"ID_BB_GLOBAL","TICKER","ID_CUSIP_8_CHR",'OCC_SYMBOL','UNIQUE_ID_FUT_OPT','OPRA_SYMBOL','TRADING_SYSTEM_IDENTIFIER'),
+                                    additioncols = c("ID_ISIN","ID_BB_UNIQUE","ID_SEDOL","ID_COMMON",
+                                                     "ID_WERTPAPIER","ID_CUSIP","ID_BB","ID_ITALY",
+                                                     "ID_EXCH_SYMBOL","ID_FULL_EXCHANGE_SYMBOL",
+                                                     "COMPOSITE_ID_BB_GLOBAL","ID_BB_GLOBAL_SHARE_CLASS_LEVEL",
+                                                     "ID_BB_SEC_NUM_DES","ID_BB_GLOBAL","TICKER",
+                                                     "ID_CUSIP_8_CHR","OCC_SYMBOL","UNIQUE_ID_FUT_OPT",
+                                                     "OPRA_SYMBOL","TRADING_SYSTEM_IDENTIFIER"),
                                     proxy = NULL){
 
 
@@ -103,9 +112,9 @@ OpenFIGI_MappingCreator <- function(input,
   .f <- function(i){
     if(is.null(jsonrst[[i]])) return(NULL)
     temprst <- OpenFIGI_assignadditionalcols(jsonrst[[i]],additioncols)
-    if(!is.na(input[['idType']][i])){
-      if(any(input[['idType']][i]==additioncols)){
-        temprst[[input[['idType']][i]]] <- input[['idValue']][i]
+    if(!is.na(input[["idType"]][i])){
+      if(any(input[["idType"]][i]==additioncols)){
+        temprst[[input[["idType"]][i]]] <- input[["idValue"]][i]
       }
     }
     temprst
