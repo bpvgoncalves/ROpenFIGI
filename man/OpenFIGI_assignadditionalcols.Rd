@@ -20,4 +20,3 @@ Assign addition cols
 \details{
 internal function
 }
-

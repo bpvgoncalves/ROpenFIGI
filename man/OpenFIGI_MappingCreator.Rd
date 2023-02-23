@@ -4,14 +4,17 @@
 \alias{OpenFIGI_MappingCreator}
 \title{Create mapping table out of OpenFIGI}
 \usage{
-OpenFIGI_MappingCreator(input, apikey = NULL,
+OpenFIGI_MappingCreator(
+  input,
+  apikey = NULL,
   openfigiurl = "https://api.openfigi.com/v1/mapping",
-  additioncols = c("ID_ISIN", "ID_BB_UNIQUE", "ID_SEDOL", "ID_COMMON",
-  "ID_WERTPAPIER", "ID_CUSIP", "ID_BB", "ID_ITALY", "ID_EXCH_SYMBOL",
-  "ID_FULL_EXCHANGE_SYMBOL", "COMPOSITE_ID_BB_GLOBAL",
-  "ID_BB_GLOBAL_SHARE_CLASS_LEVEL", "ID_BB_SEC_NUM_DES", "ID_BB_GLOBAL",
-  "TICKER", "ID_CUSIP_8_CHR", "OCC_SYMBOL", "UNIQUE_ID_FUT_OPT", "OPRA_SYMBOL",
-  "TRADING_SYSTEM_IDENTIFIER"))
+  additioncols = c("ID_ISIN", "ID_BB_UNIQUE", "ID_SEDOL", "ID_COMMON", "ID_WERTPAPIER",
+    "ID_CUSIP", "ID_BB", "ID_ITALY", "ID_EXCH_SYMBOL", "ID_FULL_EXCHANGE_SYMBOL",
+    "COMPOSITE_ID_BB_GLOBAL", "ID_BB_GLOBAL_SHARE_CLASS_LEVEL", "ID_BB_SEC_NUM_DES",
+    "ID_BB_GLOBAL", "TICKER", "ID_CUSIP_8_CHR", "OCC_SYMBOL", "UNIQUE_ID_FUT_OPT",
+    "OPRA_SYMBOL", "TRADING_SYSTEM_IDENTIFIER"),
+  proxy = NULL
+)
 }
 \arguments{
 \item{input}{input data.frame or json, and others that can be feed into toJSON}
@@ -21,6 +24,10 @@ OpenFIGI_MappingCreator(input, apikey = NULL,
 \item{openfigiurl}{Bloomberg's OpenFIGI URL, please see https://openfigi.com/api}
 
 \item{additioncols}{additional columns you would like to include in the data.frame}
+
+\item{proxy}{if needed, web proxy information can be passed to the function.
+Accepts: NULL (default) = No proxy,   "auto" = Tries to auto detect a suitable proxy or an
+object created by httr::use_proxy().}
 }
 \value{
 a data.frame
@@ -33,8 +40,6 @@ assiging ISIN, CUSIP and other columns needed. Requires dplyr package to bind ro
 }
 \examples{
 \dontrun{
-  setInternet2()
   figirst = OpenFIGI_MappingCreator(sampleOpenFIGIdf())
 }
 }
-

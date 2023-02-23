@@ -3,12 +3,8 @@
 \docType{package}
 \name{ROpenFIGI}
 \alias{ROpenFIGI}
-\alias{ROpenFIGI-package}
 \title{ROpenFIGI}
 \description{
-ROpenFIGI
-}
-\details{
 Provide a simple interface to OpenFIGI by Bloomberg.
 parse data into data.frame
 }
@@ -17,4 +13,3 @@ Ruokun Huang \email{hruokun.2008@gmail.com}
 
 Maintainer: Ruokun Huang \email{hruokun.2008@gmail.com}
 }
-
