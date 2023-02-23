@@ -11,6 +11,7 @@ Description: Provide a simple interface to Bloomberg's OpenFIGI API.
 License: GPL (>= 3)
 URL: https://github.com/HuangRicky/ROpenFIGI
 Imports:
+    curl,
     httr,
     jsonlite
 Suggests: 

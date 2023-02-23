@@ -21,7 +21,9 @@ showFIGIIDType <- function(){
 #' @param apikey your API key
 #' @param openfigiurl Bloomberg's OpenFIGI URL, please see https://openfigi.com/api
 #' @param preferdf if only supply 1 input, do you prefer to see the data.frame directly
-#' @param proxy if needed, web proxy information can be passed to the function
+#' @param proxy if needed, web proxy information can be passed to the function.
+#'   Accepts: NULL (default) = No proxy,   "auto" = Tries to auto detect a suitable proxy or an
+#'   object created by httr::use_proxy().
 #' @return a list of data.frame, of a data.frame if preferdf=T and only 1 request
 #' @examples
 #' \dontrun{
@@ -52,9 +54,18 @@ OpenFIGI <- function(input,
   }
 
   if(is.null(proxy)){
+    # No proxy used
     req <- httr::POST(openfigiurl, h, body = myjson)
   } else {
-    req <- httr::POST(openfigiurl, h, proxy, body = myjson)
+    if (!inherits(proxy, "request")) {
+      if (tolower(proxy) == "auto") {
+        proxy <- httr::use_proxy(curl::ie_get_proxy_for_url(openfigiurl),
+                                 auth = "ntlm")
+      } else {
+        stop("Invalid proxy input. Expected: NULL, \"auto\" or httr::use_proxy() object.")
+      }
+    }
+    req <- httr::POST(openfigiurl, config = c(h, proxy), body = myjson)
   }
 
   if(as.integer(req$status_code)!=200L){
@@ -82,11 +93,12 @@ OpenFIGI <- function(input,
 #' @param apikey your API key
 #' @param openfigiurl Bloomberg's OpenFIGI URL, please see https://openfigi.com/api
 #' @param additioncols additional columns you would like to include in the data.frame
-#' @param proxy if needed, web proxy information can be passed to the function
+#' @param proxy if needed, web proxy information can be passed to the function.
+#'   Accepts: NULL (default) = No proxy,   "auto" = Tries to auto detect a suitable proxy or an
+#'   object created by httr::use_proxy().
 #' @return a data.frame
 #' @examples
 #' \dontrun{
-#'   setInternet2()
 #'   figirst = OpenFIGI_MappingCreator(sampleOpenFIGIdf())
 #' }
 #' @export
