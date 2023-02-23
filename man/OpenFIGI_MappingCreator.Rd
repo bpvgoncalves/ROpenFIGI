@@ -25,7 +25,9 @@ OpenFIGI_MappingCreator(
 
 \item{additioncols}{additional columns you would like to include in the data.frame}
 
-\item{proxy}{if needed, web proxy information can be passed to the function}
+\item{proxy}{if needed, web proxy information can be passed to the function.
+Accepts: NULL (default) = No proxy,   "auto" = Tries to auto detect a suitable proxy or an
+object created by httr::use_proxy().}
 }
 \value{
 a data.frame
@@ -38,7 +40,6 @@ assiging ISIN, CUSIP and other columns needed. Requires dplyr package to bind ro
 }
 \examples{
 \dontrun{
-  setInternet2()
   figirst = OpenFIGI_MappingCreator(sampleOpenFIGIdf())
 }
 }

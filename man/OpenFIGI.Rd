@@ -21,7 +21,9 @@ OpenFIGI(
 
 \item{preferdf}{if only supply 1 input, do you prefer to see the data.frame directly}
 
-\item{proxy}{if needed, web proxy information can be passed to the function}
+\item{proxy}{if needed, web proxy information can be passed to the function.
+Accepts: NULL (default) = No proxy,   "auto" = Tries to auto detect a suitable proxy or an
+object created by httr::use_proxy().}
 }
 \value{
 a list of data.frame, of a data.frame if preferdf=T and only 1 request
