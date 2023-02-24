@@ -60,7 +60,8 @@ OpenFIGI <- function(input,
     if (!inherits(proxy, "request")) {
       if (tolower(proxy) == "auto") {
         proxy <- httr::use_proxy(curl::ie_get_proxy_for_url(openfigiurl),
-                                 auth = "ntlm")
+                                 auth = "ntlm",
+                                 username = "")
       } else {
         stop("Invalid proxy input. Expected: NULL, \"auto\" or httr::use_proxy() object.")
       }

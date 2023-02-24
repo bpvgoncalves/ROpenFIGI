@@ -1,7 +1,7 @@
 Type: Package
 Package: ROpenFIGI
 Title: R Interface to OpenFIGI
-Version: 0.2.8.9002
+Version: 0.2.8.9003
 Author: Ruokun Huang <hruokun.2008@gmail.com>
 Maintainer: Ruokun Huang <hruokun.2008@gmail.com>
 Description: Provide a simple interface to Bloomberg's OpenFIGI API.
